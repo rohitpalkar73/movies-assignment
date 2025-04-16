@@ -1,0 +1,18 @@
+<div *ngIf="movie" class="movie-detail">
+  <div class="poster-container">
+    <img [src]="getMovieImageURL(movie)" alt="{{ movie.Title }} poster" />
+  </div>
+  <div class="movie-info">
+    <h1>
+      {{ movie.Title }} <span class="year">({{ movie.Year }})</span>
+    </h1>
+    <p><strong>Directed by:</strong> {{ movie.Directors }}</p>
+    <p><strong>Starring:</strong> {{ movie.Actors }}</p>
+    <p><strong>Genres:</strong> {{ movie.Genres }}</p>
+    <p class="plot"><strong>Plot:</strong> {{ movie.Plot }}</p>
+    <div class="rating-box">
+      <span class="rating-label">Rating:</span>
+      <span class="rating-value">{{ movie.Rating }}</span>
+    </div>
+  </div>
+</div>

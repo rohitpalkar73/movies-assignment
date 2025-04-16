@@ -1,0 +1,86 @@
+<div class="header-container">
+  <div class="header">
+    <div class="logo-wrapper-left">
+      <img class="icon" src="./assets/icons/logo_slash.svg" alt="Left Icon" />
+      <img class="icon" src="./assets/icons/logo_text.svg" alt="Right Icon" />
+    </div>
+    <div class="logo-wrapper-right">
+      <img
+        class="icon icon-avatar"
+        src="./assets/icons/avatar.svg"
+        alt="Right Icon"
+      />
+    </div>
+  </div>
+</div>
+<div class="search-header">
+  <h1>Find your new favourite flic...</h1>
+</div>
+<div class="search-container">
+  <input
+    [(ngModel)]="searchText"
+    (input)="filterMovies()"
+    placeholder="Search moovee..."
+  />
+</div>
+<div class="movie-grid">
+  <div
+    class="movie-card"
+    *ngFor="let movie of visibleMovies"
+    [ngStyle]="{ 'border-color': movieColorMap.get(movie.Title) }"
+    [routerLink]="['/movie', movie.Title]"
+  >
+    <div class="movie-poster">
+      <img
+        [src]="getMovieImageURL(movie)"
+        alt="{{ movie.Title }} poster"
+        (error)="onImageError($event)"
+      />
+    </div>
+    <div class="movie-info">
+      <p class="year">{{ movie.Year }}</p>
+      <h3 class="movie-title">{{ movie.Title }}</h3>
+      <div class="genres">
+        <div class="genre" *ngFor="let genre of movie.Genres.split(',')">
+          {{ genre.trim() }}
+        </div>
+      </div>
+    </div>
+    <span
+      class="rating rating-badge"
+      [ngStyle]="{
+        'background-color': movieColorMap.get(movie.Title),
+        'border-color': movieColorMap.get(movie.Title)
+      }"
+      >{{ movie.Rating }}</span
+    >
+  </div>
+</div>
+<div class="loader" *ngIf="isLoading || currentIndex < filtered.length">
+  Loading more...
+</div>
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-links">
+      <div class="link-header">HELP</div>
+      <span>Contact us</span>
+      <span>FAQ</span>
+    </div>
+    <div class="footer-links">
+      <div class="link-header">LEGAL STAFF</div>
+      <span>Privacy Policy</span>
+      <span>Terms & conditions</span>
+      <span>Cookie Policy</span>
+      <span>Gift Cards</span>
+    </div>
+    <div class="footer-links">
+      <div class="link-header">FOLLOW US</div>
+      <span>Instagram</span>
+      <span>Facebook</span>
+      <span>Twitter</span>
+    </div>
+  </div>
+  <div class="footer-image">
+    <img class="icon" src="./assets/icons/logo_slash.svg" alt="Left Icon" />
+  </div>
+</footer>
